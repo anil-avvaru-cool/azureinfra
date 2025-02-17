@@ -4,6 +4,8 @@
 param storageAccountName string = 'store${uniqueString(resourceGroup().id)}'
 param location string = resourceGroup().location
 
+param environment string = 'prod'
+
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-05-01' = {
   name: 'exampleVNet'
   location: location
@@ -37,4 +39,21 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
     name: 'Standard_LRS'
   }
   kind: 'StorageV2'
+  tags: {
+    env: environment
+  }
+}
+
+resource blobServices 'Microsoft.Storage/storageAccounts/blobServices@2023-05-01' = {
+  name: 'blobser/root'
+}
+
+resource container1 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = {
+  name: 'tf-state'
+  parent: blobServices
+}
+
+resource container2 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = {
+  name: 'data'
+  parent: blobServices
 }

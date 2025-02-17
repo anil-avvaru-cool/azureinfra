@@ -1,6 +1,8 @@
 az group create --name storage-rg --location eastus
-
 az deployment group create --resource-group storage-rg --template-file main.bicep --parameters storageAccountName=avvaru27
+
+az resource list -o table
+az group list -o table
 
 az group delete --name storage-rg
 az group delete --name NetworkWatcherRG

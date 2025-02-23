@@ -6,3 +6,8 @@ az group list -o table
 
 az group delete --name storage-rg -y
 az group delete --name NetworkWatcherRG -y
+
+
+Run in powershell or WSL but not in git bash
+az ad sp create-for-rbac --name tfsp --role Contributor --scopes /subscriptions/0518a586-cc27-4b05-afca-9f56c45184f6
+

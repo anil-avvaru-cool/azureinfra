@@ -15,5 +15,14 @@ module stg './storage-base.bicep' = {
     location: location    
   }
 }
-
 output primaryBlobEndpoint string = stg.outputs.primaryBlobEndpoint
+
+module vnet './base-modules/vnet-base.bicep' = {
+  name: 'vnetModule'
+  params: {
+    location: location
+    vnet_name: 'existingVnet'
+  }
+}
+
+output vnetId string = vnet.outputs.vnetId
